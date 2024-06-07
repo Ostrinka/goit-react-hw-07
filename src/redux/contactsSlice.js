@@ -1,12 +1,6 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, deleteContact } from './contactsOps';
 import { selectFilter } from './filtersSlice';
-// import userContacts from '../userContacts.json';
-// import { nanoid } from 'nanoid';
-
-// const initialState = {
-//   items: userContacts,
-// };
 
 const contactsSlice = createSlice({
   name: 'contacts',
