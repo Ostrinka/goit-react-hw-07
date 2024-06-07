@@ -1,4 +1,4 @@
-// import { useId } from "react";
+import { useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 import { useDispatch } from 'react-redux';
@@ -16,10 +16,10 @@ export default function ContactForm() {
     number: Yup.string().min(3, "Too Short!")
       .max(50, "Too Long!").required("Required")
   });
-    // const fieldId = useId();
+    const fieldId = useId();
     const dispatch = useDispatch();
     const handleSubmit = (values, actions) => {
-      dispatch(addContact(values.name, values.number));
+      dispatch(addContact({ ...values }));
       actions.resetForm();
     };
   
@@ -27,13 +27,13 @@ export default function ContactForm() {
       <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={userSchema}>
         <Form className={css.form}>
           <div className={css.wrapper}>
-            <label>Name</label>
-            <Field type="text" name="name"/>
+            <label  htmlFor={`${fieldId}-name`}>Name</label>
+            <Field type="text" name="name" id={`${fieldId}-name`}/>
             <ErrorMessage name="name" component="span" className={css.error}/>
           </div>
           <div className={css.wrapper}> 
-            <label>Number</label>
-            <Field type="text" name="number"/>
+            <label  htmlFor={`${fieldId}-number`}>Number</label>
+            <Field type="text" name="number" id={`${fieldId}-number`}/>
             <ErrorMessage name="number" component="span" className={css.error}/>
           </div>
           <button className={css.btn} type="submit">Add contact</button>
